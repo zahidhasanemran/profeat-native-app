@@ -1,19 +1,28 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
-import HomePage from './src/screens/Home';
+import {
+  default as Home,
+  default as SearchIcon,
+  default as User,
+} from 'react-native-vector-icons/FontAwesome';
+import {QueryClientProvider} from '@tanstack/react-query';
+import HomePage from './src/screens/Home/Home';
 import ProfilePage from './src/screens/Profile';
 import Search from './src/screens/Search';
-import Home from 'react-native-vector-icons/FontAwesome';
-import User from 'react-native-vector-icons/FontAwesome';
-import SearchIcon from 'react-native-vector-icons/FontAwesome';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Login from './src/screens/Login/Login';
+import Register from './src/screens/Register/Register';
+import {queryClientEx} from './src/configs/query.config';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
+const queryClient = queryClientEx;
 
-function MyTabs() {
+function TabNavigation() {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -26,21 +35,29 @@ function MyTabs() {
         tabBarStyle: {
           height: 70,
         },
-        tabBarInactiveTintColor: 'green',
-      }}>
+        tabBarInactiveTintColor: 'black',
+      }}
+      initialRouteName="Login">
       <Tab.Screen
         options={{
           tabBarIcon: () => <Home name="home" size={20} color="#444" />,
         }}
-        name="Home"
+        name="Dashboard"
         component={HomePage}
       />
       <Tab.Screen
         options={{
           tabBarIcon: () => <User name="user" size={20} color="#444" />,
         }}
-        name="Profile"
-        component={ProfilePage}
+        name="Login"
+        component={Login}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: () => <User name="user" size={20} color="#444" />,
+        }}
+        name="Register"
+        component={Register}
       />
       <Tab.Screen
         options={{
@@ -52,8 +69,6 @@ function MyTabs() {
     </Tab.Navigator>
   );
 }
-
-const Stack = createNativeStackNavigator();
 
 function RootStack() {
   return (
@@ -67,35 +82,13 @@ function RootStack() {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <MyTabs />
-      {/* <RootStack /> */}
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <TabNavigation />
+        {/* <RootStack /> */}
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 };
 
 export default App;
-
-// const styles = StyleSheet.create({
-//   app: {
-//     fontSize: 30,
-//     color: 'red',
-//   },
-//   image: {
-//     width: 200,
-//     height: 150,
-//     marginTop: 50,
-//   },
-//   button: {
-//     backgroundColor: 'green',
-//     padding: 10,
-//     borderRadius: 5,
-//     marginTop: 20,
-//     width: '50%',
-//   },
-//   text: {
-//     fontWeight: 'bold',
-//     color: 'white',
-//     textAlign: 'center',
-//   },
-// });

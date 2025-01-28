@@ -8,7 +8,10 @@ const HomePage = () => {
   return (
     <SafeAreaView>
       <Text>HomePage</Text>
-      <Button onPress={() => navigation.navigate('Profile')}>Profile</Button>
+      <Button
+        onPress={() => navigation.navigate('Profile', {id: 1, name: 'Emran'})}>
+        Profile
+      </Button>
     </SafeAreaView>
   );
 };

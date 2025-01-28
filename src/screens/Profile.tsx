@@ -3,8 +3,10 @@ import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {Button} from '@react-navigation/elements';
 
-const ProfilePage = () => {
+const ProfilePage = ({route}) => {
   const navigation = useNavigation();
+  console.log(route?.params?.name);
+
   return (
     <SafeAreaView>
       <Text>ProfilePage</Text>

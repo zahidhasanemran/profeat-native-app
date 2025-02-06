@@ -63,7 +63,7 @@ const useRegister = () => {
     onSuccess: () => {},
   });
   const onSubmit = data => {
-    console.log(data);
+    // console.log(data);
     registerMutation.mutate(data);
   };
   return {

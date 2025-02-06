@@ -61,7 +61,10 @@ const useLogin = () => {
   const navigation = useNavigation();
   const logginMutation = useMutation({
     mutationFn: data => loggedIn(data),
-    onSuccess: () => {},
+    onSuccess: () => {
+      // after login successfully i want to show a push notification in user's mobile device 
+      // but i don't know how to do it 
+    },
   });
   const onSubmit = data => {
     console.log(data);

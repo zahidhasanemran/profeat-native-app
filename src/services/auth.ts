@@ -1,11 +1,12 @@
-import axios from 'axios';
+import {publicRequest} from '../configs/axios.config';
 
 export async function loggedIn(data: any) {
-  const response = await axios.post(`http://localhost:8081`, data);
+  const response = await publicRequest.post(`api/auth/login`, data);
   return response;
 }
 
 export async function register(data: any) {
-  const response = await axios.post(`http://localhost:8081`, data);
+  console.log(data);
+  const response = await publicRequest.post(`api/auth/register`, data);
   return response;
 }

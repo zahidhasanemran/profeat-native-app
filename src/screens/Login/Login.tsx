@@ -13,7 +13,6 @@ import useLogin from './useLogin';
 import {Button} from '@react-navigation/elements';
 
 const Login = () => {
-  
   const {img, styles, navigation, onSubmit} = useLogin();
 
   const {

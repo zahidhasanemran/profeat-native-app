@@ -2,7 +2,7 @@ import {useNavigation} from '@react-navigation/native';
 import {useMutation} from '@tanstack/react-query';
 import {StyleSheet} from 'react-native';
 import {loggedIn} from '../../services/auth';
-import {queryClientEx} from '../../configs/query.config';
+import EncryptedStorage from 'react-native-encrypted-storage';
 const img =
   'https://static.vecteezy.com/system/resources/previews/006/596/933/non_2x/abstract-dark-red-background-dark-lines-glow-waves-flicker-vector.jpg';
 
@@ -59,11 +59,18 @@ const styles = StyleSheet.create({
 
 const useLogin = () => {
   const navigation = useNavigation();
+
   const logginMutation = useMutation({
-    mutationFn: data => loggedIn(data),
-    onSuccess: () => {
-      // after login successfully i want to show a push notification in user's mobile device 
-      // but i don't know how to do it 
+    mutationFn: dataa => loggedIn(dataa),
+    onSuccess: async data => {
+      const token = data?.data?.token;
+      try {
+        await EncryptedStorage.setItem('user_token', token);
+        console.log(token, 'khadiza');
+        // navigation.navigate('Home');
+      } catch (error) {
+        console.error('Failed to save the token:', error);
+      }
     },
   });
   const onSubmit = data => {

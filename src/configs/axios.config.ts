@@ -1,4 +1,15 @@
+import EncryptedStorage from 'react-native-encrypted-storage';
 import axios from 'axios';
+
+const getToken = async () => {
+  try {
+    const token = await EncryptedStorage.getItem('user_token');
+    return token;
+  } catch (error) {
+    console.error('Failed to retrieve token:', error);
+    return null;
+  }
+};
 
 const apiUrl = 'https://blog-app-backend-1vtn.onrender.com/';
 
@@ -26,7 +37,7 @@ const privateReqWithFile = axios.create({
 
 privateReqWithFile.interceptors.request.use(
   config => {
-    const token = '';
+    const token = getToken();
     // const token = useStore.getState().token;
 
     if (token && config.headers) {
@@ -47,7 +58,7 @@ privateRequest.interceptors.request.use(
   config => {
     // Retrieve the token from the Zustand store
     // const token = useStore.getState().token;
-    const token = '';
+    const token = getToken();
 
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -69,6 +80,7 @@ privateRequest.interceptors.response.use(
     console.error('Response error:', error?.response);
 
     if (error?.response?.status === 401) {
+      EncryptedStorage.removeItem('user_token');
       // Handle unauthorized access
       // useStore.getState().clearUserInfo();
       // Clear user info from Zustand store

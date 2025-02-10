@@ -10,7 +10,7 @@ const HomePage = () => {
       <Text style={styles.title}>Dashboard</Text>
       <View style={styles.btnContainer}>
         {menus?.map(sm => (
-          <TabItem sm={sm} />
+          <TabItem sm={sm} key={sm?.id} />
         ))}
       </View>
     </SafeAreaView>

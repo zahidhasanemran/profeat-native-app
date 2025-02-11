@@ -4,7 +4,6 @@ import React, {useEffect, useState} from 'react';
 import {
   default as FontAwesome,
   default as Home,
-  default as SearchIcon,
   default as User,
 } from 'react-native-vector-icons/FontAwesome';
 import HomePage from './src/screens/Home/Home';

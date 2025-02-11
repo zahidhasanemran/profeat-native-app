@@ -1,4 +1,6 @@
+import {useQuery} from '@tanstack/react-query';
 import {StyleSheet} from 'react-native';
+import {getAllPosts} from '../../services/posts';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,19 +15,21 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     gap: 10,
+    justifyContent: 'space-between',
   },
 });
 
-const menus = [
-  {id: 1, name: 'all', text: 'All Item'},
-  {id: 2, name: 'low', text: 'Low Item'},
-  {id: 3, name: 'empty', text: 'Empty Item'},
-];
-
 const useHome = () => {
+  const {data, isLoading, error} = useQuery({
+    queryKey: ['all-posts'],
+    queryFn: getAllPosts,
+  });
+
   return {
     styles,
-    menus,
+    data,
+    isLoading,
+    error,
   };
 };
 

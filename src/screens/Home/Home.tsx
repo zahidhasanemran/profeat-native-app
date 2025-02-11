@@ -1,29 +1,37 @@
 import {Text, SafeAreaView, View, Pressable} from 'react-native';
 import React from 'react';
-import TabItem from '../../components/TabItem';
 import useHome from './useHome';
 import {useAuthStore} from '../../stores/authStore';
+import AllPost from '../../components/AllPost';
 
 const HomePage = () => {
-  const {styles, menus} = useHome();
-  const logout = useAuthStore(state => state.logout); // Zustand logout function
+  const {styles, posts} = useHome();
+  const logout = useAuthStore(state => state.logout);
 
   const handleLogout = async () => {
-    await logout(); // Clear token and update state
+    await logout();
   };
 
   return (
     <SafeAreaView style={styles?.container}>
-      <Text style={styles.title}>Dashboard</Text>
-      <View>
-        <Pressable onPress={handleLogout}>
-          <Text>Logout</Text>
-        </Pressable>
+      <View style={styles.btnContainer}>
+        <Text style={styles.title}>Dashboard</Text>
+        <View>
+          <Pressable onPress={handleLogout}>
+            <Text>Logout</Text>
+          </Pressable>
+        </View>
       </View>
       <View style={styles.btnContainer}>
-        {menus?.map(sm => (
-          <TabItem sm={sm} key={sm?.id} />
-        ))}
+        <Text>All Posts</Text>
+        <View>
+          <Pressable>
+            <Text>Create</Text>
+          </Pressable>
+        </View>
+      </View>
+      <View style={styles.Posts}>
+        <AllPost data={posts} />
       </View>
     </SafeAreaView>
   );

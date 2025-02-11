@@ -9,3 +9,8 @@ export async function getSinglePost(data: any) {
   const response = await publicRequest.post(`api/post/:id`, data);
   return response;
 }
+
+export async function createPost(data: any) {
+  const response = await publicRequest.post(`api/post/create`, data);
+  return response?.data;
+}

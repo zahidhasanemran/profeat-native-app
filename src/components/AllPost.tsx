@@ -1,16 +1,14 @@
-import {Pressable, StyleSheet, Text, View} from 'react-native';
+import {Pressable, StyleSheet, Text, View, ScrollView} from 'react-native';
 import React from 'react';
 import useHome from '../screens/Home/useHome';
 
 const AllPost = () => {
   const {data} = useHome();
-  // console.log(data);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {data?.data?.length &&
-        data?.data?.map((sm, i) => {
-          console.log(sm);
+        data?.data?.map(sm => {
           return (
             <View style={styles.card} key={sm?._id}>
               <Text style={styles?.title}>{sm?.title}</Text>
@@ -28,7 +26,7 @@ const AllPost = () => {
             </View>
           );
         })}
-    </View>
+    </ScrollView>
   );
 };
 

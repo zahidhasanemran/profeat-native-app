@@ -8,7 +8,7 @@ import {
 } from 'react-native-vector-icons/FontAwesome';
 import HomePage from './src/screens/Home/Home';
 // import ProfilePage from './src/screens/Profile';
-import Search from './src/screens/Search';
+import Create from './src/screens/Create/Create';
 
 import {NavigationContainer} from '@react-navigation/native';
 // import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -104,12 +104,10 @@ const AppNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Search"
-        component={Search}
+        name="Create"
+        component={Create}
         options={{
-          tabBarIcon: () => (
-            <FontAwesome name="search" size={20} color="#444" />
-          ),
+          tabBarIcon: () => <FontAwesome name="edit" size={20} color="#444" />,
         }}
       />
     </Tab.Navigator>
